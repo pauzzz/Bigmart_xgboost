@@ -93,7 +93,8 @@ model=xgb.train(final_params, xgdmat)
 
 
 
-#plot feature importance. fnlwgt is most important with age and capital_gain coming second and third.
+#plot feature importance. 
+
 xgb.plot_importance(model)
 
 #make our own nice looking feature importance plot instead of using the builtin xgb.plot_importance
@@ -117,5 +118,5 @@ y_pred
 test['Item_Outlet_Sales']=y_pred
 
 test=test[['Item_Identifier', 'Outlet_Identifier', 'Item_Outlet_Sales']]
-
-test.to_csv('Submission.csv')
+test.set_index('Item_Identifier')
+test.to_csv('Submission.csv', index='Item_Identifier')
