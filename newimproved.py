@@ -1,10 +1,9 @@
 import pandas as pd
-import numpy as np
 import xgboost as xgb
 import seaborn as sns
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report, accuracy_score
+
 
 train=pd.read_csv('train.csv')
 test=pd.read_csv('test.csv')
@@ -25,6 +24,8 @@ data.info()
 data['Outlet_Size'].value_counts()
 data['Outlet_Size']=data['Outlet_Size'].fillna('Medium')
 data.info()
+
+#Clean data in item fat content
 
 for feat in data:
   if data[feat].dtype=='object':
@@ -120,3 +121,10 @@ test['Item_Outlet_Sales']=y_pred
 test=test[['Item_Identifier', 'Outlet_Identifier', 'Item_Outlet_Sales']]
 test.set_index('Item_Identifier')
 test.to_csv('Submission.csv', index='Item_Identifier')
+
+
+
+
+
+
+
